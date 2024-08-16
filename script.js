@@ -9,6 +9,8 @@ const score1El = document.querySelector('#score--1');
 const diceE1 = document.querySelector('.dice');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
+const btnNew = document.querySelector('.btn--new');
+const playerWinner = document.querySelector('.player--active');
 
 let scores, currentScore, activePlayer, playing;
 
@@ -21,6 +23,13 @@ const init = () => {
   score1El.textContent = 0;
 
   diceE1.classList.add('hidden');
+
+  player0E1.classList.add('player--active');
+  player0E1.classList.remove('player--winner');
+  player1E1.classList.remove('player--active', 'player--winner');
+  document
+    .querySelectorAll('.current-score')
+    .forEach(el => (el.textContent = 0));
 };
 
 init();
@@ -37,7 +46,7 @@ const switchPlayer = () => {
 btnRoll.addEventListener('click', () => {
   if (playing) {
     const dice = Math.trunc(Math.random() * 6) + 1;
-    console.log(dice);
+    // console.log(dice);
 
     diceE1.classList.remove('hidden');
     diceE1.src = `dice-${dice}.png`;
@@ -76,4 +85,8 @@ btnHold.addEventListener('click', () => {
       switchPlayer();
     }
   }
+});
+
+btnNew.addEventListener('click', () => {
+  init();
 });
